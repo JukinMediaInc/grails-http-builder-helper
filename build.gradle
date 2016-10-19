@@ -16,8 +16,8 @@ plugins {
     id "com.jfrog.bintray" version "1.3.1"
 }
 
-version "1.0.2"
-group "org.grails.plugins"
+version "2.0.0jk1"
+group "com.jukinmedia"
 
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
