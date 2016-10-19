@@ -15,9 +15,13 @@
  */
 package grails.plugin.httpbuilderhelper
 
+import com.jukinmedia.httpclient.HttpBuilderFactoryService
+import com.jukinmedia.httpclient.HttpClientFactory
+import com.jukinmedia.httpclient.RestClientFactoryService
 import groovyx.net.http.AsyncHTTPBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
+import org.apache.http.impl.client.CloseableHttpClient
 
 import java.lang.reflect.InvocationTargetException
 
@@ -139,5 +143,31 @@ class HttpBuilderHelperGrailsPlugin extends Plugin {
             builder.client.connectionManager.schemeRegistry,
             ProxySelector.default
         )
+    }
+
+    Closure doWithSpring() {
+        { ->
+            restClientFactoryService(RestClientFactoryService) { bean ->
+                httpClientPool = ref('httpClientPool')
+            }
+
+            httpBuilderFactoryService(HttpBuilderFactoryService) { bean ->
+                httpClientPool = ref('httpClientPool')
+            }
+
+            // pools http clients
+            httpClientPool(CloseableHttpClient) { bean ->
+                bean.scope = 'singleton'
+                bean.factoryMethod = 'createClient'
+                bean.factoryBean = 'httpClientPoolFactory'
+                bean.destroyMethod = 'close'
+            }
+
+            // sets reasonable default timeouts and a preference for TLSv1.2.
+            httpClientPoolFactory(HttpClientFactory) { bean ->
+                bean.scope = 'singleton'
+                bean.initMethod = 'afterPropertiesSet'
+            }
+        }
     }
 }

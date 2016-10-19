@@ -65,7 +65,10 @@ dependencies {
         exclude module: "commons-logging"
         exclude module: "xml-apis"
         exclude module: "groovy"
+        exclude module: "httpclient"
     }
+    compile "org.apache.httpcomponents:httpclient:4.5.1"
+    compile "org.apache.httpcomponents:httpcore:4.4.3"
 }
 
 task wrapper(type: Wrapper) {
