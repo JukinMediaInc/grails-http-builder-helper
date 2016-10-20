@@ -5,6 +5,14 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
+        maven {
+            url 'https://assets.jukinmedia.com/artifactory'
+            credentials {
+                username "${jukinRepoUsername}"
+                password "${jukinRepoPassword}"
+            }
+            name = "JukinRepo"
+        }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
@@ -115,4 +123,21 @@ publishing {
                      extension:'xml'
         }
     }
+    repositories {
+        maven { // https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.repositories.MavenArtifactRepository.html
+            name 'JukinRepo'
+            credentials {
+                // put properties jukinRepo* in ~/.gradle/gradle.properties, or provide -D options to Gradle
+                username "${jukinRepoUsername}"
+                password "${jukinRepoPassword}"
+            }
+            if (version.endsWith('-SNAPSHOT')) {
+                url 'https://assets.jukinmedia.com/artifactory/plugins-snapshots-local'
+            } else {
+                url 'https://assets.jukinmedia.com/artifactory/plugins-release-local'
+            }
+        }
+    }
 }
+
+task install(dependsOn: project.tasks.withType(PublishToMavenLocal))
