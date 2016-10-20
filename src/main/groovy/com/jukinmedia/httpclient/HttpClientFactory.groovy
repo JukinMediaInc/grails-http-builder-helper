@@ -1,3 +1,18 @@
+/*
+ * Copyright 2009-2016 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.jukinmedia.httpclient
 
 import org.apache.http.client.config.RequestConfig
@@ -37,7 +52,7 @@ class HttpClientFactory implements InitializingBean, BeanNameAware {
     Integer connectionTimeout = 10000
     Boolean useSsl = true
     String[] supportedProtocols = ["TLSv1.2", "TLSv1.1", "TLSv1"] as String[]
-    // Prefer TLS v1.2 to work around bug where our JDK prefers v1.1 but it doesn't work with https://www.jukinvideo.com/
+    // Prefer TLS v1.2 to work around bug where our JDK prefers v1.1 but it doesn't work with some https server configurations
     Boolean tcpNoDelay = false
     // Written data to the network is not buffered pending acknowledgement of previously written data.
 

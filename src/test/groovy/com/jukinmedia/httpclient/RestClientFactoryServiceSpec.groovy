@@ -17,6 +17,7 @@ class RestClientFactoryServiceSpec extends Specification {
     void setupSpec() {
         defineBeans {
             // pools http clients
+            //noinspection GrUnresolvedAccess
             httpClientPool(CloseableHttpClient) { bean ->
                 bean.autowire = true
                 bean.scope = 'singleton'
@@ -26,6 +27,7 @@ class RestClientFactoryServiceSpec extends Specification {
             }
 
             // sets reasonable default timeouts and a preference for TLSv1.2.
+            //noinspection GrUnresolvedAccess
             httpClientPoolFactory(HttpClientFactory) { bean ->
                 bean.autowire = true
                 bean.scope = 'singleton'
@@ -35,12 +37,12 @@ class RestClientFactoryServiceSpec extends Specification {
         log.info "Logging is enabled for this test"
     }
 
-    void "test jukinHttpClientPool instantiates"() {
+    void "test httpClientPool instantiates"() {
         expect:
         service.httpClientPool instanceof CloseableHttpClient
     }
 
-    void "test jukinHttpClientPool is singleton"() {
+    void "test httpClientPool is singleton"() {
         when:
         def someInstanceIds = (1..5).collect { service.httpClientPool.toString() }.toSet()
         log.info someInstanceIds.toString()
