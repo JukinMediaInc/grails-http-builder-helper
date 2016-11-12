@@ -10,3 +10,4 @@
 plugin.xml
 grails-rest-*.zip
 grails-rest-*.zip.sha1
+.idea
