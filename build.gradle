@@ -137,7 +137,7 @@ publishing {
                 password "${jukinRepoPassword}"
             }
             if (version.endsWith('-SNAPSHOT')) {
-                url 'https://assets.jukinmedia.com/artifactory/plugins-snapshots-local'
+                url 'https://assets.jukinmedia.com/artifactory/plugins-snapshot-local'
             } else {
                 url 'https://assets.jukinmedia.com/artifactory/plugins-release-local'
             }

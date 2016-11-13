@@ -23,6 +23,6 @@ Future Vision:
 
 Developers: to build and distribute this plugin, run
 
-    ./grailsw -i assemble publish
+    ./gradlew clean assemble publish
     
 with appropriate credentials already set in ~/.gradle/gradle.properties for the target repository.
