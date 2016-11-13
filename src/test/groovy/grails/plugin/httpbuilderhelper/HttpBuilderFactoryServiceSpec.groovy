@@ -4,6 +4,7 @@ import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.services.ServiceUnitTestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
+import groovyx.net.http.HTTPBuilder
 import org.apache.http.impl.client.CloseableHttpClient
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
@@ -43,6 +44,11 @@ class HttpBuilderFactoryServiceSpec extends Specification {
         service.httpClientPool instanceof CloseableHttpClient
     }
 
+    void "test httpClientPool serves instance of HTTPBuilder"() {
+        expect:
+        service.instance instanceof HTTPBuilder
+    }
+
     void "test jukinHttpClientPool is singleton"() {
         when:
         def someInstanceIds = (1..5).collect { service.httpClientPool.toString() }.toSet()
@@ -50,5 +56,14 @@ class HttpBuilderFactoryServiceSpec extends Specification {
 
         then:
         someInstanceIds.size() == 1
+    }
+
+    void "test HTTPBuilder is not singleton"() {
+        when:
+        def someInstanceIds = (1..5).collect { service.instance.toString() }.toSet()
+        log.info someInstanceIds.toString()
+
+        then:
+        someInstanceIds.size() == 5
     }
 }

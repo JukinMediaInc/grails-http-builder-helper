@@ -4,6 +4,7 @@ import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.services.ServiceUnitTestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
+import groovyx.net.http.RESTClient
 import org.apache.http.impl.client.CloseableHttpClient
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
@@ -42,6 +43,11 @@ class RestClientFactoryServiceSpec extends Specification {
         service.httpClientPool instanceof CloseableHttpClient
     }
 
+    void "test httpClientPool serves instance of RESTClient"() {
+        expect:
+        service.instance instanceof RESTClient
+    }
+
     void "test httpClientPool is singleton"() {
         when:
         def someInstanceIds = (1..5).collect { service.httpClientPool.toString() }.toSet()
@@ -49,5 +55,14 @@ class RestClientFactoryServiceSpec extends Specification {
 
         then:
         someInstanceIds.size() == 1
+    }
+
+    void "test RESTClient is not singleton"() {
+        when:
+        def someInstanceIds = (1..5).collect { service.instance.toString() }.toSet()
+        log.info someInstanceIds.toString()
+
+        then:
+        someInstanceIds.size() == 5
     }
 }
