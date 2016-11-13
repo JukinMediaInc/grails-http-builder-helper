@@ -15,6 +15,7 @@
  */
 package org.grails.plugins.httpbuilderhelper
 
+import org.apache.http.HttpHost
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.config.SocketConfig
 import org.apache.http.conn.HttpClientConnectionManager
@@ -74,6 +75,11 @@ class HttpClientFactory implements InitializingBean, BeanNameAware {
         hcb = HttpClients.custom()
         scb = SocketConfig.custom()
         rcb = RequestConfig.custom()
+
+        if (System.getProperty('proxy')) {
+            HttpHost proxy = new HttpHost("127.0.0.1", 8888, "http");
+            rcb.setProxy(proxy)
+        }
 
         sslContext = SSLContexts.createDefault()
         sslHostnameVerifier = new DefaultHostnameVerifier()
