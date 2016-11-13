@@ -15,9 +15,6 @@
  */
 package grails.plugin.httpbuilderhelper
 
-import com.jukinmedia.httpclient.HttpBuilderFactoryService
-import com.jukinmedia.httpclient.HttpClientFactory
-import com.jukinmedia.httpclient.RestClientFactoryService
 import groovyx.net.http.AsyncHTTPBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient

@@ -1,4 +1,4 @@
-package com.jukinmedia.httpclient
+package grails.plugin.httpbuilderhelper
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
@@ -8,16 +8,18 @@ import org.apache.http.impl.client.CloseableHttpClient
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
 
-@TestFor(RestClientFactoryService)
+/**
+ * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+ */
+@TestFor(HttpBuilderFactoryService)
 @TestMixin([GrailsUnitTestMixin, ServiceUnitTestMixin])
-class RestClientFactoryServiceSpec extends Specification {
+class HttpBuilderFactoryServiceSpec extends Specification {
 
     static def log = LoggerFactory.getLogger(this)
 
     void setupSpec() {
         defineBeans {
             // pools http clients
-            //noinspection GrUnresolvedAccess
             httpClientPool(CloseableHttpClient) { bean ->
                 bean.autowire = true
                 bean.scope = 'singleton'
@@ -27,7 +29,6 @@ class RestClientFactoryServiceSpec extends Specification {
             }
 
             // sets reasonable default timeouts and a preference for TLSv1.2.
-            //noinspection GrUnresolvedAccess
             httpClientPoolFactory(HttpClientFactory) { bean ->
                 bean.autowire = true
                 bean.scope = 'singleton'
@@ -37,12 +38,12 @@ class RestClientFactoryServiceSpec extends Specification {
         log.info "Logging is enabled for this test"
     }
 
-    void "test httpClientPool instantiates"() {
+    void "test jukinHttpClientPool instantiates"() {
         expect:
         service.httpClientPool instanceof CloseableHttpClient
     }
 
-    void "test httpClientPool is singleton"() {
+    void "test jukinHttpClientPool is singleton"() {
         when:
         def someInstanceIds = (1..5).collect { service.httpClientPool.toString() }.toSet()
         log.info someInstanceIds.toString()

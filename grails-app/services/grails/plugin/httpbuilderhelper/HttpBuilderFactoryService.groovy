@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jukinmedia.httpclient
+package grails.plugin.httpbuilderhelper
 
 import groovyx.net.http.HTTPBuilder
 import org.apache.http.impl.client.CloseableHttpClient
