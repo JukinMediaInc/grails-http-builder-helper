@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package grails.plugin.httpbuilderhelper
+package org.grails.plugins.httpbuilderhelper
 
 import groovyx.net.http.AsyncHTTPBuilder
 import groovyx.net.http.HTTPBuilder
@@ -24,9 +24,9 @@ import java.lang.reflect.InvocationTargetException
 
 import org.apache.http.impl.conn.ProxySelectorRoutePlanner
 
-import grails.plugin.httpbuilderhelper.ssl.HTTPBuilderSSLConstants
-import grails.plugin.httpbuilderhelper.ssl.HTTPBuilderSSLHelper
-import grails.plugin.httpbuilderhelper.ssl.SimpleHTTPBuilderSSLHelper
+import org.grails.plugins.httpbuilderhelper.ssl.HTTPBuilderSSLConstants
+import org.grails.plugins.httpbuilderhelper.ssl.HTTPBuilderSSLHelper
+import org.grails.plugins.httpbuilderhelper.ssl.SimpleHTTPBuilderSSLHelper
 
 import grails.plugins.Plugin
 

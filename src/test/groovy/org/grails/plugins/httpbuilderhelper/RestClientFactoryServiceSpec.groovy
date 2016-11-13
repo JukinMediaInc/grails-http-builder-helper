@@ -1,26 +1,24 @@
-package grails.plugin.httpbuilderhelper
+package org.grails.plugins.httpbuilderhelper
 
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.services.ServiceUnitTestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
-import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.RESTClient
 import org.apache.http.impl.client.CloseableHttpClient
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
-@TestFor(HttpBuilderFactoryService)
+@TestFor(RestClientFactoryService)
 @TestMixin([GrailsUnitTestMixin, ServiceUnitTestMixin])
-class HttpBuilderFactoryServiceSpec extends Specification {
+class RestClientFactoryServiceSpec extends Specification {
 
     static def log = LoggerFactory.getLogger(this)
 
     void setupSpec() {
         defineBeans {
             // pools http clients
+            //noinspection GrUnresolvedAccess
             httpClientPool(CloseableHttpClient) { bean ->
                 bean.autowire = true
                 bean.scope = 'singleton'
@@ -30,6 +28,7 @@ class HttpBuilderFactoryServiceSpec extends Specification {
             }
 
             // sets reasonable default timeouts and a preference for TLSv1.2.
+            //noinspection GrUnresolvedAccess
             httpClientPoolFactory(HttpClientFactory) { bean ->
                 bean.autowire = true
                 bean.scope = 'singleton'
@@ -39,17 +38,17 @@ class HttpBuilderFactoryServiceSpec extends Specification {
         log.info "Logging is enabled for this test"
     }
 
-    void "test jukinHttpClientPool instantiates"() {
+    void "test httpClientPool instantiates"() {
         expect:
         service.httpClientPool instanceof CloseableHttpClient
     }
 
-    void "test httpClientPool serves instance of HTTPBuilder"() {
+    void "test httpClientPool serves instance of RESTClient"() {
         expect:
-        service.instance instanceof HTTPBuilder
+        service.instance instanceof RESTClient
     }
 
-    void "test jukinHttpClientPool is singleton"() {
+    void "test httpClientPool is singleton"() {
         when:
         def someInstanceIds = (1..5).collect { service.httpClientPool.toString() }.toSet()
         log.info someInstanceIds.toString()
@@ -58,7 +57,7 @@ class HttpBuilderFactoryServiceSpec extends Specification {
         someInstanceIds.size() == 1
     }
 
-    void "test HTTPBuilder is not singleton"() {
+    void "test RESTClient is not singleton"() {
         when:
         def someInstanceIds = (1..5).collect { service.instance.toString() }.toSet()
         log.info someInstanceIds.toString()

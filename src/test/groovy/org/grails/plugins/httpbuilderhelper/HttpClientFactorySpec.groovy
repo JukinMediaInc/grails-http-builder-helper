@@ -1,4 +1,4 @@
-package grails.plugin.httpbuilderhelper
+package org.grails.plugins.httpbuilderhelper
 
 import grails.test.mixin.TestMixin
 import grails.test.mixin.services.ServiceUnitTestMixin

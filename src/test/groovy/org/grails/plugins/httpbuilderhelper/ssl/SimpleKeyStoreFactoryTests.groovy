@@ -1,4 +1,4 @@
-package grails.plugin.httpbuilderhelper.ssl
+package org.grails.plugins.httpbuilderhelper.ssl
 
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin

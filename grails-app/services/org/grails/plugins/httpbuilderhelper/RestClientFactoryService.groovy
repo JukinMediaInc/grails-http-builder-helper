@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package grails.plugin.httpbuilderhelper
+package org.grails.plugins.httpbuilderhelper
 
 import groovyx.net.http.RESTClient
 import org.apache.http.impl.client.CloseableHttpClient

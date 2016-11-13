@@ -29,7 +29,7 @@ plugins {
 }
 
 version "1.0.0-SNAPSHOT"
-group "grails.plugin.httpbuilderhelper"
+group "org.grails.plugins.httpbuilderhelper"
 
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
@@ -98,10 +98,10 @@ bintray {
         userOrg = 'grails'
         name = "$project.name"
         licenses = ['Apache-2.0']
-        desc = 'Grails HTTP Builder Helper Plugin'
-        websiteUrl = 'https://bobbywarner.github.io/grails-http-builder-helper'
-        issueTrackerUrl = 'https://github.com/bobbywarner/grails-http-builder-helper/issues'
-        vcsUrl = 'https://github.com/bobbywarner/grails-http-builder-helper'
+        desc = 'Grails 3 HTTP Builder Helper Plugin'
+        websiteUrl = 'https://github.com/JukinMediaInc/grails-http-builder-helper'
+        issueTrackerUrl = 'https://github.com/JukinMediaInc/grails-http-builder-helper/issues'
+        vcsUrl = 'https://github.com/JukinMediaInc/grails-http-builder-helper'
         publicDownloadNumbers = true
         attributes = ['http': '', 'rest': '']
     }
