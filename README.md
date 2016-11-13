@@ -9,7 +9,12 @@ To use, inject either a RestClientFactoryService or HttpBuilderFactoryService in
 controller or service, and fetch a new HTTP client instance via the getInstance method.
 
 To override the new default settings for all client connections, copy and create your own HttpClientFactory,
-and register it as "httpClientFactory" in your resources.groovy file.
+and register it as "httpClientPoolFactory" in your resources.groovy file, like this but with your own class.
+
+    httpClientPoolFactory(HttpClientFactory) { bean ->
+        bean.scope = 'singleton'
+        bean.initMethod = 'afterPropertiesSet'
+    }
 
 Future Vision:
 
