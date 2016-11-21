@@ -31,18 +31,25 @@ import org.apache.http.impl.client.CloseableHttpClient
 class RestClientFactoryService {
 
     CloseableHttpClient httpClientPool
-    Object defaultURI
-    Object defaultContentType
 
     RESTClient getInstance() {
-        RESTClient builder
-        if (defaultURI && defaultContentType) {
-            builder = new RESTClient(defaultURI, defaultContentType)
-        } else if (defaultURI) {
-            builder = new RESTClient(defaultURI)
-        } else {
-            builder = new RESTClient()
+        RESTClient builder = new RESTClient()
+        if (httpClientPool) {
+            builder.client = httpClientPool
         }
+        return builder
+    }
+
+    RESTClient getInstance(String defaultURI) {
+        RESTClient builder = new RESTClient(defaultURI)
+        if (httpClientPool) {
+            builder.client = httpClientPool
+        }
+        return builder
+    }
+
+    RESTClient getInstance(String defaultURI, String defaultContentType) {
+        RESTClient builder = new RESTClient(defaultURI, defaultContentType)
         if (httpClientPool) {
             builder.client = httpClientPool
         }

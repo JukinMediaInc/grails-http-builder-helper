@@ -31,18 +31,25 @@ import org.apache.http.impl.client.CloseableHttpClient
 class HttpBuilderFactoryService {
 
     CloseableHttpClient httpClientPool
-    Object defaultURI
-    Object defaultContentType
 
     HTTPBuilder getInstance() {
-        HTTPBuilder builder
-        if (defaultURI && defaultContentType) {
-            builder = new HTTPBuilder(defaultURI, defaultContentType)
-        } else if (defaultURI) {
-            builder = new HTTPBuilder(defaultURI)
-        } else {
-            builder = new HTTPBuilder()
+        HTTPBuilder builder = new HTTPBuilder()
+        if (httpClientPool) {
+            builder.client = httpClientPool
         }
+        return builder
+    }
+
+    HTTPBuilder getInstance(String defaultURI) {
+        HTTPBuilder builder = new HTTPBuilder(defaultURI)
+        if (httpClientPool) {
+            builder.client = httpClientPool
+        }
+        return builder
+    }
+
+    HTTPBuilder getInstance(String defaultURI, String defaultContentType) {
+        HTTPBuilder builder = new HTTPBuilder(defaultURI, defaultContentType)
         if (httpClientPool) {
             builder.client = httpClientPool
         }
