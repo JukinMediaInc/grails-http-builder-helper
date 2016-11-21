@@ -40,7 +40,7 @@ class HttpBuilderFactoryService {
         return builder
     }
 
-    HTTPBuilder getInstance(String defaultURI) {
+    HTTPBuilder getInstance(def defaultURI) {
         HTTPBuilder builder = new HTTPBuilder(defaultURI)
         if (httpClientPool) {
             builder.client = httpClientPool
@@ -48,7 +48,7 @@ class HttpBuilderFactoryService {
         return builder
     }
 
-    HTTPBuilder getInstance(String defaultURI, String defaultContentType) {
+    HTTPBuilder getInstance(def defaultURI, def defaultContentType) {
         HTTPBuilder builder = new HTTPBuilder(defaultURI, defaultContentType)
         if (httpClientPool) {
             builder.client = httpClientPool

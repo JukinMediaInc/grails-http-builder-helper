@@ -40,7 +40,7 @@ class RestClientFactoryService {
         return builder
     }
 
-    RESTClient getInstance(String defaultURI) {
+    RESTClient getInstance(def defaultURI) {
         RESTClient builder = new RESTClient(defaultURI)
         if (httpClientPool) {
             builder.client = httpClientPool
@@ -48,7 +48,7 @@ class RestClientFactoryService {
         return builder
     }
 
-    RESTClient getInstance(String defaultURI, String defaultContentType) {
+    RESTClient getInstance(def defaultURI, def defaultContentType) {
         RESTClient builder = new RESTClient(defaultURI, defaultContentType)
         if (httpClientPool) {
             builder.client = httpClientPool
